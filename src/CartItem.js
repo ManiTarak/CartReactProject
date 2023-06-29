@@ -1,14 +1,14 @@
 import React from 'react';
 import './index.css';
 class CartItem extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            price:9999,
-            title:"Mobile Phone",
-            qty:1
-        }
-    }
+    // constructor(){
+    //     super();
+    //     this.state={
+    //         price:9999,
+    //         title:"Mobile Phone",
+    //         qty:1
+    //     }
+    // }
     increaseQuantity=()=>{
         this.setState({
             qty:this.state.qty+1,
@@ -24,7 +24,7 @@ class CartItem extends React.Component{
         })
     }
     render(){
-        const {price,title,qty}=this.state;
+        const {price,title,qty}=this.props.product;
         return(
             <div className='cart-item'>
                 <div className='left-block'>
@@ -32,7 +32,7 @@ class CartItem extends React.Component{
                 </div>
                 <div className='right-block'>
                     <div  >{title}</div>
-                    <div style={{color:'grey'}}>{this.state.price}</div>
+                    <div style={{color:'grey'}}>{price}</div>
                     <div style={{color:'grey'}}>{qty}</div>
                     <div className='cart-item-actions'>
                     <img alt="increase" className="action-icons" onClick={this.increaseQuantity} src="https://cdn-icons-png.flaticon.com/128/1828/1828925.png"/>
