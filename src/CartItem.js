@@ -2,11 +2,11 @@ import React from 'react';
 import './index.css';
 class CartItem extends React.Component{
     render(){
-        const {price,title,qty}=this.props.product;
+        const {price,title,qty,img}=this.props.product;
         return(
             <div className='cart-item'>
                 <div className='left-block'>
-                 <img style={{width:110, height:110, borderRadius:4}}/>
+                 <img src={img} style={{width:110, height:110, borderRadius:4}}/>
                 </div>
                 <div className='right-block'>
                     <div  >{title}</div>
