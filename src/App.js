@@ -14,7 +14,7 @@ class App extends React.Component {
     }
 }
 componentDidMount(){
-  firebase.firestore().collection('products').get().then((snapshot)=>{
+  firebase.firestore().collection('products').onSnapshot((snapshot)=>{
     const Products=snapshot.docs.map((doc)=>{
       let data=doc.data();
       data["id"]=doc.id;
