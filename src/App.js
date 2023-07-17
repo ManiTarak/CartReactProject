@@ -3,32 +3,26 @@ import Cart from "./Cart";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import React from "react";
+import firebase from 'firebase/compat/app';
 class App extends React.Component {
   constructor(){
     super();
     this.state={
-        Products:[{
-            price:9999,
-        title:"Mobile Phone",
-        qty:1,
-        img:"https://tse2.mm.bing.net/th?id=OIP.JXM6HXq-84nWGESB2rxp3QHaHa&pid=Api&P=0&h=180",
-        id:1
-        },
-        {
-            price:9999,
-        title:"Watch",
-        qty:2,
-        img:"https://tse3.mm.bing.net/th?id=OIP.O9qk0A7goHMTWq9dQbE10wHaHa&pid=Api&P=0&h=180",
-        id:2
-        },{
-            price:99999,
-        title:"Macbook",
-        qty:1,
-        img:"https://www.ilounge.com/wp-content/uploads/2019/04/macbook-air.jpeg",
-        id:3
-        }]
+        Products:[]
         
     }
+}
+componentDidMount(){
+  firebase.firestore().collection('products').get().then((snapshot)=>{
+    const Products=snapshot.docs.map((doc)=>{
+      let data=doc.data();
+      data["id"]=doc.id;
+      return data;
+    });
+    this.setState({
+      Products:Products
+    });
+  })
 }
 increaseQuantity=(product)=>{
     const {Products}=this.state;
