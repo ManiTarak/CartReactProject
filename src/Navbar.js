@@ -10,7 +10,7 @@ const styles={
         display:"flex",
         flexDirection:"row",
         justifyContent:"flex-end",
-        backgroundColor:"yellow"
+        backgroundColor:"#0275dd"
     },
     navbarimg:{
         height:40,

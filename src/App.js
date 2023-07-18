@@ -62,12 +62,14 @@ decreaseQuantity=(product)=>{
 }
 deleteProduct=(product)=>{
     const {Products}=this.state;
-    const items = Products.filter((item)=>item.id!=product.id);
+    //const items = Products.filter((item)=>item.id!=product.id);
   
    
-    this.setState({
-        Products:items,
-    });
+    // this.setState({
+    //     Products:items,
+    // });
+    const docRef=firebase.firestore().collection('products').doc(product.id);
+    docRef.delete();
 }
 getTotalProductQty = () =>{
   const {Products} = this.state;
