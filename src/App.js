@@ -69,12 +69,46 @@ getTotalPrice= () =>{
   });
   return total;
 }
+addProduct=()=>{
+const Tvalue=document.getElementById("titleID").value;
+const Pvalue=document.getElementById("priceID").value;
+const Qvalue=document.getElementById("QtyID").value;
+console.log(typeof(Qvalue));
+const Ivalue=document.getElementById("imgID").value;
+firebase.firestore().collection('products').add({
+  title:Tvalue,
+  price:Pvalue,
+  qty:Qvalue,
+  img:Ivalue
+});
+}
   render(){
     const {Products,loading}=this.state;
   return (
     <div className="App">
       <Navbar count={this.getTotalProductQty()}/>
-      <Cart Products={Products} loading={loading}  onincreaseQuantity={this.increaseQuantity} ondecreaseQuantity={this.decreaseQuantity} onDeleteItem={this.deleteProduct}></Cart>
+      <div style={{display:"none"}}>
+      <form>
+      <div>
+      <label><b>Title     </b></label>
+      <input id="titleID" type="text" required></input>
+      </div>
+      <div>
+      <label><b>Price     </b></label>
+      <input id="priceID" type="text" required></input>
+      </div>
+      <div>
+      <label><b>Qty     </b></label>
+      <input id="QtyID" type="text" required></input>
+      </div>
+      <div>
+      <label><b>ImageAddress     </b></label>
+      <input id="imgID" type="text" required></input>
+      </div>
+      <button onClick={this.addProduct}>Add Product to Cart</button>
+      </form>
+      </div>
+      <Cart  Products={Products} loading={loading}  onincreaseQuantity={this.increaseQuantity} ondecreaseQuantity={this.decreaseQuantity} onDeleteItem={this.deleteProduct}></Cart>
       <Footer price={this.getTotalPrice()}></Footer>
     </div>
   );
