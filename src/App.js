@@ -47,9 +47,17 @@ decreaseQuantity=(product)=>{
     const index = Products.indexOf(product);
     if(Products[index].qty==1)
      return ;
-    Products[index].qty-=1;
-    this.setState({
-        Products:Products,
+    // Products[index].qty-=1;
+    // this.setState({
+    //     Products:Products,
+    // });
+    const docRef=firebase.firestore().collection('products').doc(product.id);
+    docRef.update({
+      qty:product.qty-1
+    }).then(()=>{
+      console.log("updated successfully");
+    }).catch((err)=>{
+      console.log("Error in updating");
     });
 }
 deleteProduct=(product)=>{
